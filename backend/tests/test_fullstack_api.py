@@ -1,6 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
+import uuid
 
 client = TestClient(app)
 
@@ -11,15 +12,21 @@ def test_health():
 
 def test_workspace_project_task_flow():
     # 1. Create Workspace
-    ws_res = client.post("/api/v1/workspaces", json={"name": "Acme SaaS", "slug": "acme-saas"})
+    unique_slug = f"acme-saas-{uuid.uuid4().hex[:8]}"
+
+    ws_res = client.post("/api/v1/workspaces", json={
+    "name": "Acme SaaS",
+    "slug": unique_slug
+    })
     assert ws_res.status_code == 200
     ws_id = ws_res.json()["id"]
 
     # 2. Create Project
     proj_res = client.post("/api/v1/projects", json={
-        "name": "Mobile Redesign",
-        "description": "Redesign iOS/Android apps",
-        "workspace_id": ws_id
+    "name": "Mobile Redesign",
+    "client_name": "Acme Client",
+    "description": "Redesign iOS/Android apps",
+    "workspace_id": ws_id
     })
     assert proj_res.status_code == 200
     proj_id = proj_res.json()["id"]

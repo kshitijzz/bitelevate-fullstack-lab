@@ -21,3 +21,11 @@ __pycache__/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Frontend dependencies and build
+frontend/node_modules/
+frontend/.next/
+frontend/test-output.css
+
+# Backend virtual environment
+backend/venv/
