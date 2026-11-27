@@ -25,6 +25,8 @@ interface Task {
   status: TaskStatus;
   project_id: string;
   priority: TaskPriority;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export default function FullstackDashboard() {

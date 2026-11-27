@@ -64,4 +64,5 @@ class TaskResponse(BaseModel):
     status: TaskStatus
     project_id: str
     created_at: datetime
+    updated_at: datetime
     priority: str

@@ -46,4 +46,11 @@ class Task(Base):
     priority = Column(String, default="MEDIUM", nullable=False)
     project_id = Column(String, ForeignKey("projects.id", ondelete="CASCADE"), nullable=False)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(
+        DateTime,
+        default=lambda: datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc),
+        nullable=False
+    )
     project = relationship("Project", back_populates="tasks")
+   
