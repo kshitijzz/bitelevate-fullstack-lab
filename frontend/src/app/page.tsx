@@ -10,6 +10,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-950 p-4">
+      
       <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 rounded-xl bg-purple-600 flex items-center justify-center font-bold text-white text-xl">

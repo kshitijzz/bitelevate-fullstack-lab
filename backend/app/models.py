@@ -32,7 +32,7 @@ class Project(Base):
     description = Column(Text, nullable=True)
     workspace_id = Column(String, ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
-
+    client_name = Column(String(255), nullable=False)
     workspace = relationship("Workspace", back_populates="projects")
     tasks = relationship("Task", back_populates="project", cascade="all, delete-orphan")
 
@@ -43,7 +43,14 @@ class Task(Base):
     title = Column(String(255), nullable=False)
     description = Column(Text, nullable=True)
     status = Column(SQLEnum(TaskStatus), default=TaskStatus.TODO, nullable=False)
+    priority = Column(String, default="MEDIUM", nullable=False)
     project_id = Column(String, ForeignKey("projects.id", ondelete="CASCADE"), nullable=False)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
-
+    updated_at = Column(
+        DateTime,
+        default=lambda: datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc),
+        nullable=False
+    )
     project = relationship("Project", back_populates="tasks")
+   
